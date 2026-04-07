@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
+import brandLogo from "@/assets/Logo dental moderno y elegante.png";
 
 const navLinks = [
   { label: "Inicio", href: "#inicio" },
@@ -10,7 +11,7 @@ const navLinks = [
   { label: "Contacto", href: "#contacto" },
 ];
 
-const WHATSAPP_URL = "https://wa.me/18092612054?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita";
+const WHATSAPP_URL = "https://wa.me/18092612054?text=Hola%2C%20me%20gustaria%20agendar%20una%20cita";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -27,21 +28,40 @@ export default function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-card/95 backdrop-blur-lg shadow-sm border-b border-border"
-          : "bg-transparent"
+          : "bg-white/72 backdrop-blur-md border-b border-primary/6"
       }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 sm:h-20">
-        <a href="#inicio" className="font-heading text-lg sm:text-xl font-bold text-primary tracking-tight">
-          Dr. Díaz Meyreles
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 sm:h-20 gap-3">
+        <a href="#inicio" className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <img
+            src={brandLogo}
+            alt="Logo del Consultorio Odontologico Dr. Diaz Meyreles"
+            className="h-10 w-auto object-contain sm:h-14 shrink-0"
+          />
+          <span className="min-w-0">
+            <span
+              className={`block font-heading text-base sm:text-xl font-bold tracking-tight leading-tight truncate transition-colors duration-300 ${
+                "text-primary"
+              }`}
+            >
+              Dr. Diaz Meyreles
+            </span>
+            <span
+              className={`block text-[11px] sm:text-xs uppercase tracking-[0.18em] truncate transition-colors duration-300 ${
+                "text-muted-foreground"
+              }`}
+            >
+              Clinica dental
+            </span>
+          </span>
         </a>
 
-        {/* Desktop */}
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
+              className="text-sm font-medium transition-colors duration-300 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent after:transition-all after:duration-300 hover:after:w-full text-muted-foreground hover:text-primary"
             >
               {l.label}
             </a>
@@ -57,9 +77,8 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile toggle */}
         <button
-          className="lg:hidden p-2 text-primary"
+          className="lg:hidden p-2 transition-colors duration-300 text-primary"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -67,7 +86,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {open && (
         <div className="lg:hidden bg-card/98 backdrop-blur-xl border-t border-border animate-fade-in">
           <div className="flex flex-col gap-1 p-4">
