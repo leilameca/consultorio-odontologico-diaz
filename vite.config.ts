@@ -3,9 +3,23 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
+const resolveBasePath = (mode: string) => {
+  if (mode !== "production") {
+    return "/";
+  }
+
+  if (process.env.VITE_BASE_PATH) {
+    return process.env.VITE_BASE_PATH;
+  }
+
+  const repoName = process.env.GITHUB_REPOSITORY?.split("/")[1];
+
+  return repoName ? `/${repoName}/` : "/";
+};
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: mode === "production" ? "/consultorio-odontologico-diaz/" : "/",
+  base: resolveBasePath(mode),
   server: {
     host: "::",
     port: 8080,
